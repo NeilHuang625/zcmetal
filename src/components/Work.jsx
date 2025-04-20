@@ -64,33 +64,30 @@ export default function Work() {
         }}
         modules={[Pagination, Navigation]}
         className="workSwiper"
-        breakpoints={{
-          // 当窗口宽度大于等于 640px
-          640: {
-            spaceBetween: 30,
-          },
-        }}
       >
         {solutions.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white shadow-md hover:shadow-lg transition overflow-hidden relative max-h-[400px] sm:max-h-[600px] md:max-h-[800px]">
-              {/* 相对定位的容器用于定位绝对定位的元素 */}
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full object-cover"
-              />
+            {/* 使用固定高度代替max-height，确保所有设备上高度一致 */}
+            <div className="bg-white shadow-md hover:shadow-lg transition overflow-hidden relative h-[500px] sm:h-[600px] md:h-[800px]">
+              {/* 图片容器固定尺寸，确保图片始终填充整个区域 */}
+              <div className="h-full w-full">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
               {/* 左上角名称 - 响应式字体和位置 */}
               <div className="absolute top-3 sm:top-5 md:top-8 left-4 sm:left-6 md:left-10 px-3 sm:px-4 py-1 sm:py-2 bg-gray-100/10 backdrop-blur-xs rounded-full shadow-md">
-                <h3 className="text-lg sm:text-xl md:text-3xl tracking-wider text-zinc-50">
+                <h3 className="text-xs sm:text-lg md:text-3xl tracking-wider text-zinc-50">
                   {item.title}
                 </h3>
               </div>
 
               {/* 左下角按钮 - 响应式大小和位置 */}
               <div className="absolute bottom-4 sm:bottom-8 md:bottom-12 left-4 sm:left-6 md:left-10">
-                <button className="bg-zinc-100 hover:bg-gray-700 hover:text-zinc-50 hover:cursor-pointer text-gray-900 px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-sm sm:text-base md:text-lg transition-all duration-300 tracking-wide shadow-lg group flex items-center">
+                <button className="bg-zinc-100 hover:bg-gray-700 hover:text-zinc-50 hover:cursor-pointer text-gray-900 px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-base md:text-lg transition-all duration-300 tracking-wide shadow-lg group flex items-center">
                   <span>View Case</span>
                   <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-2">
                     →
@@ -105,7 +102,7 @@ export default function Work() {
                     e.stopPropagation();
                     swiperRef.current.swiper.slidePrev();
                   }}
-                  className="bg-black/50 backdrop-blur-xs hover:bg-black/30 hover:cursor-pointer hover:scale-105 text-white w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-colors duration-300"
+                  className="bg-black/50 backdrop-blur-xs hover:bg-black/30 hover:cursor-pointer hover:scale-105 text-white w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-colors duration-300"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -127,13 +124,13 @@ export default function Work() {
                     e.stopPropagation();
                     swiperRef.current.swiper.slideNext();
                   }}
-                  className="bg-black/50 backdrop-blur-xs hover:bg-black/30 hover:cursor-pointer hover:scale-105 text-white w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300"
+                  className="bg-black/50 backdrop-blur-xs hover:bg-black/30 hover:cursor-pointer hover:scale-105 text-white w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5"
                     fill="none"
-                    viewBox="0 24 24"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
                     <path

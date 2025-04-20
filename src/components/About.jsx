@@ -10,7 +10,7 @@ export default function AboutUs() {
     <section className="bg-white text-gray-800 py-16 px-4 sm:px-6 md:px-20 font-poppins font-extralight">
       {/* 标题和副标题 */}
       <div className="text-center mb-12">
-        <h1 className="text-3xl sm:text-4xl font-semibold mb-4">
+        <h1 className="text-2xl sm:text-3xl font-semibold mb-4">
           We Bring Your Vision to Life
         </h1>
         <p className="text-base sm:text-lg text-gray-600">
