@@ -22,9 +22,7 @@ export default function GetQuote() {
           {/* First + Last Name */}
           <div className="flex flex-col sm:flex-row gap-6">
             <div className="w-full">
-              <label className="block text-sm text-gray-500 mb-1">
-                First Name
-              </label>
+              <label className="block text-sm text-gray-500">First Name</label>
               <input
                 type="text"
                 name="firstName"
@@ -33,9 +31,7 @@ export default function GetQuote() {
               />
             </div>
             <div className="w-full">
-              <label className="block text-sm text-gray-500 mb-1">
-                Last Name
-              </label>
+              <label className="block text-sm text-gray-500 ">Last Name</label>
               <input
                 type="text"
                 name="lastName"
@@ -48,7 +44,7 @@ export default function GetQuote() {
           {/* Email + Phone */}
           <div className="flex flex-col sm:flex-row gap-6">
             <div className="w-full">
-              <label className="block text-sm text-gray-500 mb-1">Email</label>
+              <label className="block text-sm text-gray-500 ">Email</label>
               <input
                 type="email"
                 name="email"
@@ -57,7 +53,7 @@ export default function GetQuote() {
               />
             </div>
             <div className="w-full">
-              <label className="block text-sm text-gray-500 mb-1">Phone</label>
+              <label className="block text-sm text-gray-500 ">Phone</label>
               <input
                 type="tel"
                 name="phone"
@@ -68,7 +64,7 @@ export default function GetQuote() {
 
           {/* Service Dropdown */}
           <div>
-            <label className="block text-sm text-gray-500 mb-1">
+            <label className="block text-sm text-gray-500 ">
               Select a service
             </label>
             <select
@@ -83,7 +79,7 @@ export default function GetQuote() {
 
           {/* Budget Dropdown */}
           <div>
-            <label className="block text-sm text-gray-500 mb-1">
+            <label className="block text-sm text-gray-500 ">
               Anticipated spend
             </label>
             <select
@@ -99,7 +95,7 @@ export default function GetQuote() {
 
           {/* 来源 Dropdown */}
           <div>
-            <label className="block text-sm text-gray-500 mb-1">
+            <label className="block text-sm text-gray-500 ">
               Where did you hear about us?
             </label>
             <select
@@ -117,7 +113,7 @@ export default function GetQuote() {
 
           {/* Message */}
           <div>
-            <label className="block text-sm text-gray-500 mb-1">Message</label>
+            <label className="block text-sm text-gray-500 ">Message</label>
             <textarea
               name="message"
               placeholder="Describe your project..."
@@ -128,7 +124,7 @@ export default function GetQuote() {
           </div>
 
           {/* Submit */}
-          <div className="pt-6">
+          <div className="pt-3">
             <button
               type="submit"
               className="mt-4 bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition group flex items-center hover:cursor-pointer"

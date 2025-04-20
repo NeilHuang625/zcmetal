@@ -3,8 +3,8 @@ import xiaohongshuQR from "../assets/qrcode/xiaohongshu.jpeg";
 
 export default function ContactUs() {
   return (
-    <section className="bg-gray-100 py-24 px-6 md:px-12 font-poppins">
-      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-10 md:p-16 grid md:grid-cols-2 gap-16 items-start">
+    <section className="bg-gray-100 py-18 px-6 md:px-12 font-poppins">
+      <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 grid md:grid-cols-2 gap-16 items-start">
         {/* 左侧联系信息 */}
         <div className="space-y-8">
           <div>
@@ -82,7 +82,7 @@ export default function ContactUs() {
         </div>
 
         {/* 右侧地图 */}
-        <div className="rounded-xl overflow-hidden shadow-md h-[300px] md:h-full">
+        <div className="rounded-xl overflow-hidden shadow-md h-[400px] md:h-full">
           <iframe
             title="Z&C METAL Location"
             src="https://www.google.com/maps?q=65e+Kerwyn+Ave,+East+Tamaki,+Auckland+2013,+New+Zealand&output=embed"
