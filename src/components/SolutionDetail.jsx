@@ -94,7 +94,7 @@ export default function SolutionDetail() {
   return (
     <div className="bg-white min-h-screen font-poppins">
       {/* 顶部大横幅图片 */}
-      <div className="relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full overflow-hidden">
+      <div className="relative h-[30vh] md:h-[30vh] lg:h-[40vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/40 z-10"></div>
         <img 
           src={solution.image} 

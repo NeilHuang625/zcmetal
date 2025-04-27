@@ -4,7 +4,6 @@ import solution1Video from "../assets/video/8/8.mp4";
 
 import solution2Cover from "../assets/images/solutions/fence/f_p1.jpg";
 import solution2Gallery1 from "../assets/images/solutions/fence/f_p2.jpg";
-import solution2Video from "../assets/video/3/3.mp4";
 
 import solution3Cover from "../assets/images/solutions/anglegate/ag_p1.jpg";
 import solution3Video from "../assets/video/5/5.mp4";
@@ -43,7 +42,6 @@ export const solutions = [
     fullDescription: "This extended coastal balustrade installation features weather-resistant materials specifically chosen to withstand harsh seaside conditions including salt exposure, humidity, and temperature fluctuations. The design maintains structural integrity while complementing the stunning ocean views, striking the perfect balance between security and aesthetic appeal.",
     features: ["Marine-grade materials", "Corrosion-resistant finish", "Wind-resistant design", "Panoramic view preservation", "Extended length installation"],
     galleryImages: [solution2Cover, solution2Gallery1],
-    videos: [solution2Video],
     clientName: "Coastal Properties Ltd",
     designChallenges: [
       "Harsh coastal environment with salt exposure",
