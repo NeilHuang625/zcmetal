@@ -6,6 +6,109 @@
   --font-poppins: Poppins, "sans-serif";
 }
 
-html {
-  scroll-behavior: smooth;
+body {
+  background-color: #f0f4f8;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes flipIn {
+  from {
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flipOut {
+  from {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.5s ease forwards;
+}
+
+.animate-slideOutUp {
+  animation: slideOutUp 0.5s ease forwards;
+}
+
+.animate-flipIn {
+  animation: flipIn 0.5s ease-out forwards;
+  transform-origin: bottom center;
+  backface-visibility: hidden;
+}
+
+.animate-flipOut {
+  animation: flipOut 0.5s ease-in forwards;
+  transform-origin: bottom center;
+  backface-visibility: hidden;
+}
+
+/* 为了支持 delay-300 等类 */
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-500 {
+  transition-delay: 500ms;
+}
+
+.delay-600 {
+  transition-delay: 600ms;
+}
+
+.delay-700 {
+  transition-delay: 700ms;
+}
+
+.duration-900 {
+  transition-duration: 900ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+.duration-1200 {
+  transition-duration: 1200ms;
+}
+.duration-1500 {
+  transition-duration: 1500ms;
+}
+
+.perspective-500 {
+  perspective: 500px;
 }

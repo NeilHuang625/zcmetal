@@ -1,22 +1,25 @@
-import About from "./components/About.jsx";
-import Contact from "./components/Contact.jsx";
-import Footer from "./components/Footer.jsx";
-import GetQuote from "./components/GetQuote.jsx";
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import Work from "./components/Work.jsx";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AppLayout from "./pages/AppLayout";
+import Home from "./pages/Home";
+import Solutions from "./components/Solutions";
+import SolutionDetail from "./components/SolutionDetail";
+import Services from "./components/Services";
+import ServiceDetail from "./components/ServiceDetail";
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <About />
-      <Work />
-      <GetQuote />
-      <Contact />
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AppLayout><Home /></AppLayout>} />
+        <Route path="/solutions" element={<AppLayout><Solutions /></AppLayout>} />
+        <Route path="/solutions/:id" element={<AppLayout><SolutionDetail /></AppLayout>} />
+        <Route path="/services" element={<AppLayout><Services /></AppLayout>} />
+        
+        {/* 使用动态路由参数 */}
+        <Route path="/:serviceId" element={<AppLayout><ServiceDetail /></AppLayout>} />
+      </Routes>
+    </Router>
   );
 }
 
