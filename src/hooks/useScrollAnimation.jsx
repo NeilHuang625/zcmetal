@@ -16,9 +16,6 @@ export default function useScrollAnimation(options = {}) {
     }
     
     const observer = new IntersectionObserver(entries => {
-      // 添加调试信息
-      console.log("IntersectionObserver callback fired", entries);
-      
       // 更新可见性状态，根据元素是否在视口中
       const entry = entries[0];
       if (entry) {
