@@ -1,12 +1,12 @@
 import solution1Cover from "../assets/images/solutions/bighouse/bh_p1.jpg";
 import solution1Gallery1 from "../assets/images/solutions/bighouse/bh_p2.jpg";
-import solution1Video from "../assets/video/8/8.mp4";
+import solution1Video from "../assets/video/5/5.mp4";
 
 import solution2Cover from "../assets/images/solutions/fence/f_p1.jpg";
 import solution2Gallery1 from "../assets/images/solutions/fence/f_p2.jpg";
 
 import solution3Cover from "../assets/images/solutions/anglegate/ag_p1.jpg";
-import solution3Video from "../assets/video/5/5.mp4";
+import solution3Video from "../assets/video/6/6.mp4";
 
 import solution4Cover from "../assets/images/solutions/7metergate/7m_p1.jpg";
 import solution4Video from "../assets/video/3/3.mp4";
