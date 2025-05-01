@@ -330,7 +330,7 @@ const handleStartVideo = () => {
                       preload="metadata"
                       playsInline
                       muted
-                      autoPlay={!isMobile}  // 在非移动设备上尝试自动播放
+                      autoPlay
                       loop
                       poster={isMobile ? videoThumbnail : undefined}  // 为移动设备添加封面图
                     >
