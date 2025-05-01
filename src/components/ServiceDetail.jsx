@@ -306,7 +306,10 @@ const renderIcon = (iconName) => {
                       muted
                       autoPlay
                       loop
-                    />
+                    >
+                      <source src={serviceData.weldingVideoUrl} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
                   <div className="px-4 py-3 bg-gray-50">
                     <h3 className="text-sm font-medium text-gray-700">Our Welding Process</h3>
