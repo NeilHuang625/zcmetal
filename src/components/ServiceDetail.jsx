@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; // 假设您已经安装了framer-motion
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenRuler, faTruck, faWarehouse, faToolbox } from '@fortawesome/free-solid-svg-icons';
+
+import weldingVideo from '../assets/images/gallery/metalwork/1.mp4';
 
 // 定义服务详情数据
 const servicesData = {
@@ -51,7 +56,32 @@ const servicesData = {
       "Decorative elements with artistic flair",
       "Custom brackets and supports",
       "Precision sheet metal fabrication"
-    ]
+    ],
+    // 为metal-works添加新的数据结构
+    process: [
+      {
+        title: "We Design",
+        description: "Our design process begins with understanding your vision. We collaborate closely with you to sketch, model, and refine your metal work concept. Using state-of-the-art CAD software, we create precise blueprints that ensure perfect execution of your project, whether it's structural components or decorative elements.",
+        icon: "pencil-alt"
+      },
+      {
+        title: "We Manufacture",
+        description: "In our fully equipped workshop, our skilled craftsmen bring designs to life using premium materials and precision machinery. We employ various techniques including cutting, bending, welding, and finishing to fabricate custom metal products that meet the highest quality standards. Every weld, joint, and finish is executed with meticulous attention to detail.",
+        icon: "cog"
+      },
+      {
+        title: "We Deliver",
+        description: "We handle logistics with the same care as our manufacturing. Your completed metal works are carefully packaged and transported to ensure they arrive at your location in perfect condition. Our team coordinates delivery times to accommodate your schedule, making the process as smooth and convenient as possible.",
+        icon: "truck"
+      },
+      {
+        title: "We Install",
+        description: "Our professional installation team ensures your metal works are perfectly placed and securely fitted. Whether mounting structural elements or positioning decorative pieces, we work efficiently while protecting your property. After installation, we conduct thorough quality checks and clean the area, leaving you with a finished product ready to enjoy.",
+        icon: "wrench"
+      }
+    ],
+    // 焊接视频URL (示例，您需要替换为实际的视频URL)
+    weldingVideoUrl: weldingVideo
   }
 };
 
@@ -70,6 +100,9 @@ export default function ServiceDetail() {
     longDescription: "",
     features: []
   };
+
+  // 检查是否是金属加工页面
+  const isMetalWorks = serviceId === 'metal-works';
   
   useEffect(() => {
     const loadImages = async () => {
@@ -160,12 +193,33 @@ export default function ServiceDetail() {
     );
   }
 
+// 渲染不同的图标，使用固定尺寸容器确保一致性
+const renderIcon = (iconName) => {
+  return (
+    <div className="flex items-center justify-center w-18 h-18">
+      {(() => {
+        switch (iconName) {
+          case "pencil-alt":
+            return <FontAwesomeIcon icon={faPenRuler} size="4x" />;
+          case "cog":
+            return <FontAwesomeIcon icon={faWarehouse} size="4x" />;
+          case "truck":
+            return <FontAwesomeIcon icon={faTruck} size="4x" />;
+          case "wrench":
+            return <FontAwesomeIcon icon={faToolbox} size="4x" />;
+          default:
+            return null;
+        }
+      })()}
+    </div>
+  );
+};
+
   return (
     <div className="w-full bg-white font-poppins tracking-wide">
       {/* 改进的标题区域 */}
-      <div className="relative bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+      <div className="relative bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200 overflow-hidden">
         <div className="px-4 py-8">
-          
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 relative">
@@ -199,13 +253,77 @@ export default function ServiceDetail() {
         </div>
         
         {/* 装饰性几何形状 */}
-        <div className="absolute bottom-0 right-0 w-24 h-24 bg-blue-50 rounded-full -mb-12 -mr-12 opacity-50"></div>
+        <div className="absolute bottom-0 right-0 w-24 h-24 bg-blue-50 rounded-full -mb-12 -mr-12 opacity-90"></div>
         <div className="absolute top-0 right-8 w-6 h-6 bg-blue-100 rounded-full opacity-70"></div>
-        <div className="absolute bottom-4 left-1/2 w-4 h-4 bg-blue-200 rounded-full opacity-50"></div>
+        <div className="absolute bottom-4 left-1/2 w-4 h-4 bg-blue-200 rounded-full opacity-80"></div>
       </div>
 
       {/* 主要内容区域 */}
       <div className="px-4 py-6">
+
+        {/* Metal Works 专属内容 - 修改布局为横向排列 */}
+        {isMetalWorks && (
+          <div className="mb-8 max-w-[1500px]">
+            <h2 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+              <span className="w-1.5 h-5 bg-blue-600 rounded-full mr-2.5"></span>
+              Our Metal Works Process
+            </h2>
+
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* 左侧流程步骤 - 垂直排列 */}
+              <div className="md:w-2/3 space-y-4">
+                {serviceData.process && serviceData.process.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-white rounded-lg p-5 shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.15 }}
+                  >
+                    <div className="flex items-start">
+                      <div className="bg-blue-100 rounded-full p-3 mr-4 text-blue-600">
+                        {renderIcon(step.icon)}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-800 mb-2">{step.title}</h3>
+                        <p className="text-gray-600 text-sm">{step.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              
+            {/* 右侧视频 - 在中等及以上尺寸屏幕显示 */}
+            {serviceData.weldingVideoUrl && (
+              <div className="md:w-1/3 mt-6 md:mt-0">
+                <motion.div 
+                  className="sticky top-24 rounded-lg overflow-hidden shadow-lg"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <div className="aspect-[9/16] md:h-auto relative">
+                    <video 
+                      src={serviceData.weldingVideoUrl} 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      controls
+                      preload="metadata"
+                      playsInline
+                      muted
+                      autoPlay
+                      loop
+                    />
+                  </div>
+                  <div className="px-4 py-3 bg-gray-50">
+                    <h3 className="text-sm font-medium text-gray-700">Our Welding Process</h3>
+                    <p className="text-xs text-gray-500 mt-1">See our precision metalworking techniques in action</p>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+            </div>
+          </div>
+        )}
         
         {/* 特性列表 */}
         <div className="bg-gray-50 rounded-lg p-4 shadow-sm mb-6">

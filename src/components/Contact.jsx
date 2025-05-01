@@ -1,6 +1,6 @@
 import React from "react";
-import wechatQR from "../assets/qrcode/wechat.jpeg";
-import xiaohongshuQR from "../assets/qrcode/xiaohongshu.jpeg";
+import wechatQR from "../assets/qrcode/wechat.jpg";
+import xiaohongshuQR from "../assets/qrcode/xiaohongshu.jpg";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 
 export default function ContactUs() {
@@ -67,9 +67,9 @@ export default function ContactUs() {
               }`}>
                 <h4 className="text-sm text-gray-500 uppercase mb-1">Address</h4>
                 <p className="text-base leading-relaxed">
-                  65e Kerwyn Avenue,
+                1 Canon Place, 
                   <br />
-                  East Tāmaki, Auckland 2013
+                  Pakuranga Heights, Auckland 2010,
                   <br />
                   New Zealand
                 </p>
@@ -82,7 +82,7 @@ export default function ContactUs() {
                 {/* WeChat QR */}
                 <div className="transform transition-transform hover:scale-105 duration-300">
                   <h4 className="text-sm text-gray-500 uppercase mb-1">WeChat</h4>
-                  <p className="text-base">zcmetalnz</p>
+                  <p className="text-base">Chai_1990_</p>
                   <img
                     src={wechatQR}
                     alt="WeChat QR Code"
@@ -95,7 +95,7 @@ export default function ContactUs() {
                   <h4 className="text-sm text-gray-500 uppercase mb-1">
                     Xiaohongshu
                   </h4>
-                  <p className="text-base">Z&C METAL NZ</p>
+                  <p className="text-base">Chai_1990_</p>
                   <img
                     src={xiaohongshuQR}
                     alt="Xiaohongshu QR Code"
@@ -112,7 +112,7 @@ export default function ContactUs() {
           }`}>
             <iframe
               title="Z&C METAL Location"
-              src="https://www.google.com/maps?q=65e+Kerwyn+Ave,+East+Tamaki,+Auckland+2013,+New+Zealand&output=embed"
+              src="https://www.google.com/maps?q=1+Canon+Place,+Pakuranga+Heights,+Auckland+2010,+New+Zealand&output=embed"
               width="100%"
               height="100%"
               className="border-0 w-full h-full"
