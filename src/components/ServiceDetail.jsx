@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenRuler, faTruck, faWarehouse, faToolbox } from '@fortawesome/free-solid-svg-icons';
 
 import weldingVideo from '../assets/video/metalwork/1.mp4';
+import weldingVideoThumbnail from '../assets/video/metalwork/1.jpeg'; 
 
 // 定义服务详情数据
 const servicesData = {
@@ -306,6 +307,7 @@ const renderIcon = (iconName) => {
                       muted
                       autoPlay
                       loop
+                      poster={weldingVideoThumbnail}
                     >
                       <source src={serviceData.weldingVideoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
