@@ -1,6 +1,6 @@
 import React from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
-import teamImage from "../assets/team-work.jpg";
+import logoWithName from "../assets/logo_with_name.svg";
 import design from "../assets/design.png";
 import nz from "../assets/nz.png";
 import smart from "../assets/smart.png";
@@ -37,9 +37,9 @@ export default function AboutUs() {
           isSectionVisible ? 'opacity-100 transform-none' : 'opacity-0 -translate-x-20'
         }`}>
           <img
-            src={teamImage}
+            src={logoWithName}
             alt="Z&C METAL team working"
-            className="rounded-xl shadow-md object-cover w-full h-auto"
+            className="rounded-xl shadow-lg object-contain w-full max-h-[350px]"
           />
         </div>
         <div className={`w-full md:w-1/2 space-y-5 text-base sm:text-lg leading-relaxed transition-all duration-1000 delay-500 ${
