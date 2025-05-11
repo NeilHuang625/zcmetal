@@ -46,14 +46,6 @@ export default function Hero() {
     }, 3000); // 每3秒更换一次
   };
 
-  // 停止文字轮换
-  const stopRotation = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-  };
-
   // 组件挂载和卸载时的处理
   useEffect(() => {
     // 等待页面元素进场动画完成后再开始文字轮换
@@ -106,6 +98,23 @@ export default function Hero() {
           style={{ 
             filter: "brightness(0.6)",
             opacity: elementsLoaded ? 0.5 : 0 
+          }}
+          x5-video-player-type="h5"           // 添加微信X5播放器支持
+          x5-video-player-fullscreen="true"   // 支持全屏播放
+          x5-video-orientation="portraint"    // 竖屏播放
+          webkit-playsinline="true"           // 兼容旧版iOS
+          onCanPlay={() => {
+            // 视频可以播放时尝试播放
+            const video = document.querySelector('video');
+            if (video) {
+              const promise = video.play();
+              if (promise !== undefined) {
+                promise.catch(error => {
+                  // 自动播放被阻止，可以显示一个播放按钮
+                  console.log('视频自动播放被阻止:', error);
+                });
+              }
+            }
           }}
         >
           <source src={backgroundVideo} type="video/mp4" />
