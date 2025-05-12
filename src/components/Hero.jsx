@@ -22,7 +22,7 @@ export default function Hero() {
   // 控制页面元素的进场动画
   const [elementsLoaded, setElementsLoaded] = useState(false);
   // 检测是否在微信浏览器中
-  const [isWechat, setIsWechat] = useState(true);
+  const [isWechat, setIsWechat] = useState(false);
   // 控制视频是否正在播放
   const [videoPlaying, setVideoPlaying] = useState(false);
   // 创建视频引用
@@ -31,8 +31,8 @@ export default function Hero() {
   // 组件挂载时检测环境并触发进场动画
   useEffect(() => {
     // 检测是否为微信浏览器
-    // const isWechatBrowser = /MicroMessenger/i.test(navigator.userAgent);
-    // setIsWechat(isWechatBrowser);
+    const isWechatBrowser = /MicroMessenger/i.test(navigator.userAgent);
+    setIsWechat(isWechatBrowser);
     
     // 设置页面元素加载状态
     setElementsLoaded(true);
