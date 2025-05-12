@@ -22,17 +22,19 @@ export default function Hero() {
   // 控制页面元素的进场动画
   const [elementsLoaded, setElementsLoaded] = useState(false);
   // 检测是否在微信浏览器中
-  const [isWechat, setIsWechat] = useState(false);
+  const [isWechat, setIsWechat] = useState(true);
   // 控制视频是否正在播放
   const [videoPlaying, setVideoPlaying] = useState(false);
+  // 控制视频是否正在加载
+  const [videoLoading, setVideoLoading] = useState(false);
   // 创建视频引用
   const videoRef = useRef(null);
 
   // 组件挂载时检测环境并触发进场动画
   useEffect(() => {
     // 检测是否为微信浏览器
-    const isWechatBrowser = /MicroMessenger/i.test(navigator.userAgent);
-    setIsWechat(isWechatBrowser);
+    // const isWechatBrowser = /MicroMessenger/i.test(navigator.userAgent);
+    // setIsWechat(isWechatBrowser);
     
     // 设置页面元素加载状态
     setElementsLoaded(true);
@@ -98,8 +100,23 @@ export default function Hero() {
   };
   
   // 处理视频播放按钮点击
-  const handlePlayVideo = () => {
+  const handlePlayVideo = (event) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    
+    // 已经在加载中则不重复操作
+    if (videoLoading) return;
+    
+    // 设置加载状态
+    setVideoLoading(true);
+    
     if (videoRef.current) {
+      // 确保设置了正确的属性
+      videoRef.current.muted = true;
+      videoRef.current.playsInline = true;
+      
       // 尝试播放视频
       const playPromise = videoRef.current.play();
       
@@ -108,10 +125,12 @@ export default function Hero() {
           .then(() => {
             // 视频成功播放
             setVideoPlaying(true);
+            setVideoLoading(false);
           })
           .catch(error => {
             // 视频播放失败
             console.error("视频播放失败:", error);
+            setVideoLoading(false);
             alert("视频播放失败，请尝试点击播放按钮或使用其他浏览器查看。");
           });
       }
@@ -149,11 +168,28 @@ export default function Hero() {
               loop
               muted
               playsInline
+              x5-video-player-type="h5"
+              x5-video-player-fullscreen="false"
+              webkit-playsinline="true"
               poster={videoThumbnail}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ 
                 filter: "brightness(0.6)",
                 opacity: videoPlaying ? 0.5 : 0 
+              }}
+              onCanPlay={() => {
+                console.log("视频可以播放");
+              }}
+              onPlaying={() => {
+                setVideoPlaying(true);
+                setVideoLoading(false);
+              }}
+              onWaiting={() => {
+                setVideoLoading(true);
+              }}
+              onError={() => {
+                setVideoLoading(false);
+                console.error("视频播放出错");
               }}
             >
               <source src={backgroundVideo} type="video/mp4" />
@@ -172,31 +208,40 @@ export default function Hero() {
               ></div>
             )}
             
-            {/* 播放按钮 - 当视频未播放时显示 */}
+            {/* 播放按钮或加载指示器 - 当视频未播放时显示 */}
             {!videoPlaying && elementsLoaded && (
               <>
-              {/* 全屏可点击区域，但不显示 */}
-              <div 
-                onClick={handlePlayVideo}
-                className="absolute inset-0 cursor-pointer z-10"
-              />
-              
-              {/* 右上角播放按钮 - 固定位置且样式明显 */}
-              <div 
-                onClick={handlePlayVideo}
-                className="absolute top-20 right-20 z-20 cursor-pointer"
-                style={{ touchAction: 'manipulation' }} // 优化触摸操作
-              >
-                <div className="bg-black/60 bg-opacity-70 rounded-full p-2 hover:bg-opacity-90 transition-all hover:scale-110 shadow-xl">
-                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
-                  </svg>
+                {/* 全屏可点击区域，但不显示 */}
+                <div 
+                  onClick={handlePlayVideo}
+                  className="absolute inset-0 cursor-pointer z-10"
+                />
+                
+                {/* 右上角播放按钮或加载状态 - 固定位置且样式明显 */}
+                <div 
+                  onClick={handlePlayVideo}
+                  className="absolute top-18 right-12 z-18 cursor-pointer"
+                  style={{ touchAction: 'manipulation' }} // 优化触摸操作
+                >
+                  <div className="bg-black/60 bg-opacity-70 rounded-full p-2 hover:bg-opacity-90 transition-all shadow-xl flex items-center justify-center" style={{ width: '3rem', height: '3rem' }}>
+                    {videoLoading ? (
+                      // 加载中显示旋转的加载图标
+                      <svg className="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    ) : (
+                      // 未加载时显示播放图标
+                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
+                      </svg>
+                    )}
+                  </div>
+                  <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-black/60 bg-opacity-70 text-white px-3 py-1 rounded-full text-xs whitespace-nowrap">
+                    {videoLoading ? "Loading..." : "Play"}
+                  </span>
                 </div>
-                <span className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 bg-black/60 bg-opacity-70 text-white px-3 py-1 rounded-full text-sm whitespace-nowrap">
-                  Play
-                </span>
-              </div>
-            </>
+              </>
             )}
           </div>
         )}
@@ -218,7 +263,7 @@ export default function Hero() {
         >
           Modern. Durable. Reliable.
         </h1>
-        <div className={`h-16 md:h-20 mb-8 perspective-500 transition-all duration-500 delay-400 ${
+        <div className={`h-16 md:h-20 mb-8 perspective-500 transition-all duration-500 delay-400 z-18 ${
           elementsLoaded ? 'opacity-100' : 'opacity-0'
         }`}>
           <Link 
@@ -238,7 +283,7 @@ export default function Hero() {
           Custom-Built for Every Home and Business
         </p>
         <div 
-          className={`flex flex-wrap justify-center gap-8 transition-all duration-1000 delay-1200 ${
+          className={`flex flex-wrap justify-center gap-8 transition-all duration-1000 delay-1200 z-18 ${
             elementsLoaded ? 'opacity-100 transform-none' : 'opacity-0 translate-y-10'
           }`}
         >
