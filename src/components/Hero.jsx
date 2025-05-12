@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo_with_name.svg"; // Import as a URL
 import backgroundVideo from "../assets/video/video.mp4"; // 导入视频文件
+// 假设您有一个视频缩略图
+import videoThumbnail from "../assets/images/gallery/gate/Gate1.jpg"; // 您需要创建这个文件
 
 export default function Hero() {
   // 定义要轮换显示的文字数组和对应的链接
@@ -19,9 +21,20 @@ export default function Hero() {
   
   // 控制页面元素的进场动画
   const [elementsLoaded, setElementsLoaded] = useState(false);
+  // 检测是否在微信浏览器中
+  const [isWechat, setIsWechat] = useState(true);
+  // 控制视频是否正在播放
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  // 创建视频引用
+  const videoRef = useRef(null);
 
-  // 组件挂载时触发进场动画
+  // 组件挂载时检测环境并触发进场动画
   useEffect(() => {
+    // 检测是否为微信浏览器
+    const isWechatBrowser = /MicroMessenger/i.test(navigator.userAgent);
+    setIsWechat(isWechatBrowser);
+    
+    // 设置页面元素加载状态
     setElementsLoaded(true);
   }, []);
 
@@ -83,43 +96,97 @@ export default function Hero() {
       });
     }
   };
+  
+  // 处理视频播放按钮点击
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      // 尝试播放视频
+      const playPromise = videoRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // 视频成功播放
+            setVideoPlaying(true);
+          })
+          .catch(error => {
+            // 视频播放失败
+            console.error("视频播放失败:", error);
+            alert("视频播放失败，请尝试点击播放按钮或使用其他浏览器查看。");
+          });
+      }
+    }
+  };
 
   return (
     <div className="relative bg-gray-900 text-white min-h-screen flex items-center justify-center w-full font-poppins overflow-hidden">
       {/* 背景视频层 */}
       <div className="absolute inset-0 w-full h-full">
-        <video
-          autoPlay
-          preload="metadata"
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1500"
-          style={{ 
-            filter: "brightness(0.6)",
-            opacity: elementsLoaded ? 0.5 : 0 
-          }}
-          x5-video-player-type="h5"           // 添加微信X5播放器支持
-          x5-video-player-fullscreen="true"   // 支持全屏播放
-          x5-video-orientation="portraint"    // 竖屏播放
-          webkit-playsinline="true"           // 兼容旧版iOS
-          onCanPlay={() => {
-            // 视频可以播放时尝试播放
-            const video = document.querySelector('video');
-            if (video) {
-              const promise = video.play();
-              if (promise !== undefined) {
-                promise.catch(error => {
-                  // 自动播放被阻止，可以显示一个播放按钮
-                  console.log('视频自动播放被阻止:', error);
-                });
-              }
-            }
-          }}
-        >
-          <source src={backgroundVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {!isWechat ? (
+          // 非微信环境 - 自动播放视频
+          <video
+            autoPlay
+            preload="metadata"
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1500"
+            style={{ 
+              filter: "brightness(0.6)",
+              opacity: elementsLoaded ? 0.5 : 0 
+            }}
+          >
+            <source src={backgroundVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          // 微信环境 - 显示视频封面和播放按钮
+          <div className="absolute inset-0 w-full h-full">
+            {/* 视频元素 */}
+            <video
+              ref={videoRef}
+              preload="metadata"
+              loop
+              muted
+              playsInline
+              poster={videoThumbnail}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ 
+                filter: "brightness(0.6)",
+                opacity: videoPlaying ? 0.5 : 0 
+              }}
+            >
+              <source src={backgroundVideo} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            
+            {/* 视频封面背景 - 当视频未播放时显示 */}
+            {!videoPlaying && (
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+                style={{ 
+                  backgroundImage: `url(${videoThumbnail})`,
+                  filter: "brightness(0.6)",
+                  opacity: elementsLoaded ? 0.5 : 0 
+                }}
+              ></div>
+            )}
+            
+            {/* 播放按钮 - 当视频未播放时显示 */}
+            {!videoPlaying && elementsLoaded && (
+              <div 
+                onClick={handlePlayVideo}
+                className="absolute  cursor-pointer right-10 top-22"
+              >
+                <div className="bg-opacity-50 rounded-full p-3 hover:bg-opacity-70 transition-all transform hover:scale-110 shadow-xl">
+                  <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
+                  </svg>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* 内容区 */}
