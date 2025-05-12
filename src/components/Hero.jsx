@@ -31,8 +31,8 @@ export default function Hero() {
   // 组件挂载时检测环境并触发进场动画
   useEffect(() => {
     // 检测是否为微信浏览器
-    const isWechatBrowser = /MicroMessenger/i.test(navigator.userAgent);
-    setIsWechat(isWechatBrowser);
+    // const isWechatBrowser = /MicroMessenger/i.test(navigator.userAgent);
+    // setIsWechat(isWechatBrowser);
     
     // 设置页面元素加载状态
     setElementsLoaded(true);
@@ -174,16 +174,29 @@ export default function Hero() {
             
             {/* 播放按钮 - 当视频未播放时显示 */}
             {!videoPlaying && elementsLoaded && (
+              <>
+              {/* 全屏可点击区域，但不显示 */}
               <div 
                 onClick={handlePlayVideo}
-                className="absolute  cursor-pointer right-10 top-22 z-10"
+                className="absolute inset-0 cursor-pointer z-10"
+              />
+              
+              {/* 右上角播放按钮 - 固定位置且样式明显 */}
+              <div 
+                onClick={handlePlayVideo}
+                className="absolute top-20 right-20 z-20 cursor-pointer"
+                style={{ touchAction: 'manipulation' }} // 优化触摸操作
               >
-                <div className="bg-opacity-50 rounded-full p-3 hover:bg-opacity-70 transition-all transform hover:scale-110 shadow-xl">
-                  <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <div className="bg-black/60 bg-opacity-70 rounded-full p-2 hover:bg-opacity-90 transition-all hover:scale-110 shadow-xl">
+                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path>
                   </svg>
                 </div>
+                <span className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 bg-black/60 bg-opacity-70 text-white px-3 py-1 rounded-full text-sm whitespace-nowrap">
+                  Play
+                </span>
               </div>
+            </>
             )}
           </div>
         )}
