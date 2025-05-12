@@ -108,15 +108,15 @@ export default function Video() {
   }, []);
 
   // 自动播放第一个视频缩略图
-  useEffect(() => {
-    if (isSectionVisible && videoData.length > 0 && !activeVideo) {
-      setTimeout(() => {
-        if (videoRefs.current[videoData[0].id]) {
-          videoRefs.current[videoData[0].id].play().catch(err => console.log("Autoplay prevented:", err));
-        }
-      }, 1000);
-    }
-  }, [isSectionVisible, videoData, activeVideo]);
+  // useEffect(() => {
+  //   if (isSectionVisible && videoData.length > 0 && !activeVideo) {
+  //     setTimeout(() => {
+  //       if (videoRefs.current[videoData[0].id]) {
+  //         videoRefs.current[videoData[0].id].play().catch(err => console.log("Autoplay prevented:", err));
+  //       }
+  //     }, 1000);
+  //   }
+  // }, [isSectionVisible, videoData, activeVideo]);
 
   // 切换到指定视频
   const handleDragEnd = (e, info) => {
