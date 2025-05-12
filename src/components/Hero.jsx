@@ -176,7 +176,7 @@ export default function Hero() {
             {!videoPlaying && elementsLoaded && (
               <div 
                 onClick={handlePlayVideo}
-                className="absolute  cursor-pointer right-10 top-22"
+                className="absolute  cursor-pointer right-10 top-22 z-10"
               >
                 <div className="bg-opacity-50 rounded-full p-3 hover:bg-opacity-70 transition-all transform hover:scale-110 shadow-xl">
                   <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
