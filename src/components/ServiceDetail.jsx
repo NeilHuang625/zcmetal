@@ -161,10 +161,23 @@ export default function ServiceDetail() {
   const loadImagesFromModules = async (modules) => {
     const imagePromises = Object.entries(modules).map(async ([path, importFunc]) => {
       const imported = await importFunc();
-      return imported.default;
+      return {
+        url: imported.default,
+        path: path
+      };
     });
     
-    return Promise.all(imagePromises);
+    const imagesWithPaths = await Promise.all(imagePromises);
+
+    // 按照文件名里面的数字进行排序
+    imagesWithPaths.sort((a, b) => {
+      const numA = parseInt(a.path.match(/(\d+)/)?.[0] || "0");
+      const numB = parseInt(b.path.match(/(\d+)/)?.[0] || "0");
+      return numA - numB;
+    }
+    );
+    // 返回图片URL数组
+    return imagesWithPaths.map(image => image.url);
   };
   
   // 处理导航到首页联系部分
