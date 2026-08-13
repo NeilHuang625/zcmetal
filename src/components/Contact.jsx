@@ -67,9 +67,9 @@ export default function ContactUs() {
               }`}>
                 <h4 className="text-sm text-gray-500 uppercase mb-1">Address</h4>
                 <p className="text-base leading-relaxed">
-                1 Canon Place, 
+                14F Neilpark Drive,
                   <br />
-                  Pakuranga Heights, Auckland 2010,
+                  East Tāmaki, Auckland 2013,
                   <br />
                   New Zealand
                 </p>
@@ -112,7 +112,7 @@ export default function ContactUs() {
           }`}>
             <iframe
               title="Z&C METAL Location"
-              src="https://www.google.com/maps?q=1+Canon+Place,+Pakuranga+Heights,+Auckland+2010,+New+Zealand&output=embed"
+              src="https://www.google.com/maps?q=14F+Neilpark+Drive,+East+Tamaki,+Auckland+2013,+New+Zealand&output=embed"
               width="100%"
               height="100%"
               className="border-0 w-full h-full"
