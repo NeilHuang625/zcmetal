@@ -55,10 +55,10 @@ export default function ContactUs() {
               }`}>
                 <h4 className="text-sm text-gray-500 uppercase mb-1">Email</h4>
                 <a
-                  href="mailto:zcmetal.daniel@gmail.com"
+                  href="mailto:Daniel@zcmetal.co.nz"
                   className="text-base text-blue-700 hover:underline"
                 >
-                  zcmetal.daniel@gmail.com
+                  Daniel@zcmetal.co.nz
                 </a>
               </div>
 
